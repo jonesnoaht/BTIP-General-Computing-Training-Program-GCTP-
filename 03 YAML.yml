@@ -1,0 +1,105 @@
+%YAML 1.2
+---
+YAML: YAML Ain't Markup Language
+
+source: https://yaml.org/spec/1.2/spec.html#directive//
+
+Goals: |
+  The design goals for YAML are, in decreasing priority:
+   - YAML is easily readable by humans.
+   - YAML data is portable between programming languages.
+   - YAML matches the native data structures of agile languages.
+   - YAML has a consistent model to support generic tools.
+   - YAML supports one-pass processing.
+   - YAML is expressive and extensible.
+   - YAML is easy to implement and use.
+
+Documents:
+  - documents start with --- and (optionally) end with ...
+
+Datastructures:
+  Sequence:
+    - first item
+    - second item
+    - third item
+  mapping 1:
+    scalar 1: scalar 2
+    scalar 3: scalar 4
+
+  sequence of mappings:
+    -
+      mapping 2:
+        scalar 5: scalar 6
+        scalar 7: scalar 8
+    -
+      mapping 3:
+        scalar 9: scalar 10
+        scalar 11: scalar 12
+
+  ASCII Art where line breaks are to be kept: |
+    \//||\/||
+    // ||  ||__
+
+  Folded text where line breaks are merely aesthetic: >
+    it is
+    simply
+    easier
+
+  If you want to keep them: >
+    These
+    are
+    not
+    kept
+    but
+
+      this done
+      is kept
+
+    another new line
+
+  If you want to include all characters: >-
+    You just include a dash above, so that all of the word: and other expressions that would otherwise be misrepresented will be written.
+
+How could we implement this?:
+  [important sample, 20210123155527]:
+    description: >-
+      This is some sample that I got for doing some thing. Line breaks
+      will be mostly ignored unless there are two in a row or an indent.
+        This is the start of a new paragraph. Pretty old-school, right?
+      I have to say that I am a pretty big fan of this system.
+    procedure:
+      - title:
+        - day: 20210123
+        - initials: NJ
+        - type: WritingYAML
+      - experiment: YAML
+      - project: Training Programs
+  [unimportant sample, 20210123160218]:
+    description: >-
+      This experiment just completely fell apart. It would be a waste of my
+      time to process this sample. Woe is me.
+    procedure:
+      - title:
+        - day: 20210123
+        - initials: NJ
+        - type: WritingYAML
+      - experiment: YAML
+      - project: Training Programs
+
+How do we script this?:
+  notes:
+    - yaml.load() accepts a YAML object and outputs a python object.
+    - yaml.dump() accepts a python object and outputs a YAML object
+    - yaml.dump() can also be used to append python objects to a file
+    - yaml.dump_all() will accept a python list and dump them individually.
+  python script: >-
+    import yaml
+    file = open("file.yml", 'r', encoding='utf8')
+    data = yaml.load(file)
+    entries = list(dict.keys())
+    stream = file('newfile.yml', 'w')
+    yaml.dump(data, stream)
+    more_data = yaml.load("\n20210225104132NJ: Here is some new data")
+    yaml.dump(more_data, stream)
+
+Visualization: https://plantuml.com/yaml

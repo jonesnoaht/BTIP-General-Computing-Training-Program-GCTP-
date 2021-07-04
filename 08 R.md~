@@ -1,0 +1,30 @@
+# R
+
+Write modular code (see Hao's library guides page on research reproducability).
+
+```{R}
+for (i in (df$Mouse %in% df.1$Mouse)) {
+  if (i == TRUE) {
+    print('yas queen')
+    } else {
+      print('KHANNNNNNN')
+      }
+    }
+x <- cbind(x1 = 3, x2 = c(4:1, 2:5))
+dimnames(x)[[1]] <- letters[1:8]
+apply(x, 2, mean, trim = .2)
+col.sums <- apply(x, 2, sum)
+row.sums <- apply(x, 1, sum)
+rbind(cbind(x, Rtot = row.sums), Ctot = c(col.sums, sum(col.sums)))
+nlevels()
+jitter()
+append()
+Random() # must be capitalized
+runif() # the general function of getting random numbers
+mat(jitter(c(1:10,1:10)), ncol = 2) %>% data.frame() -> df
+localfit <- loess(X1 ~ X2, df)
+predict(localfit, 2:9)
+
+plot(dnorm(seq(-5, 5, .01)), type = 'l')
+hist(rnorm(seq(-5, 5, .001)), breaks = 100)
+```
